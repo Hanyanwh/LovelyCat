@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<head>
+<title>LoveCat</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- bootstrap-css -->
+<link rel="stylesheet" href="css/bootstrap.css">
+<!-- //bootstrap-css -->
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- font-awesome icons -->
+<link href="css/font-buding.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+<script>
+        (function () {
+          var js;
+          if (typeof JSON !== 'undefined' && 'querySelector' in document && 'addEventListener' in window) {
+            js = 'js/jquery-3.4.0.min.js';
+          } else {
+            js = 'js/jquery-3.4.0.min.js';
+          }
+          document.write('<script src="' + js + '"><\/script>');
+        }());
+ </script>
+<script src="js/modernizr.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<!-- charts -->
+<script src="js/raphael-min.js"></script>
+<script src="js/morris.js"></script>
+<!-- global -->
+<link rel="stylesheet" href="css/morris.css">
+<!-- //charts -->
+<!--skycons-icons-->
+<script src="js/skycons.js"></script>
+</head>
+<body class="dashboard-page">
+	<style>body{background:url(images/cat.png)}</style>
+	<script>
+	        var theme = $.cookie('protonTheme') || 'default';
+	        $('body').removeClass (function (index, css) {
+	            return (css.match (/\btheme-\S+/g) || []).join(' ');
+	        });
+	        if (theme !== 'default') $('body').addClass(theme);
+        </script>
+		<nav class="user-menu">
+			<a href="javascript:;" class="main-menu-access">
+			<i class="icon-proton-logo"></i>
+			<i class="icon-reorder"></i>
+			</a>
+		</nav>
+		<section class="title-bar">
+			<div class="logo">
+				<h1><a href="index.html"><img src="images/logo.png" alt="" />lovelyCat</a></h1>
+			</div>
+			<div class="full-screen">
+					<section class="full-top">
+						<button id="toggle" ></button>	
+					</section>
+				</div>
+			<div class="header-right" id="residue">
+				<!-- residue-->
+				<h2><img src="images/food.png" />食物余量：100g</h2></p>
+				<h2><img src="images/water.png" />水余量：100g</h2></p>
+			</div>
+			<div class="clearfix"> </div>
+		</section>
+		<div class="form">
+			<!--		form	  -->
+	</div>
+		<div class="main-grid">
+			<div class="kcal">
+				<h2 id="status">今日已摄入<em id="kcal_current">0</em>千卡，还需摄入<em id="kcal_need">0</em>千卡，约合<em id="maoliang_need">0</em>g猫粮</h2><br />
+			</div>
+	  <div class="agile-grids">
+		<div class="col-md-4 charts-right">
+					<div class="area-grids">
+						<div class="area-grids-heading">
+							<h3>今日份的营养摄入</h3>
+						</div>
+						<div id="graph4">
+							<!--	Dount		-->
+						</div>
+						
+					</div>
+				</div>
+				<div class="col-md-8 chart-left">
+					<!-- updating-data -->
+					<div class="agile-Updating-grids">
+						<div class="area-grids-heading">
+							<h3>今日饮食记录</h3>
+						</div>
+						<div id="graph1"></div>
+						<!--  Line  -->
+
+					</div>
+
+					<!-- //updating-data -->
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="agile-bottom-grids">
+				<div class="col-md-pull-12">
+					<div class="agile-bottom-grid">
+						<div class="area-grids-heading">
+							<h3>本周饮食记录</h3>
+						</div>
+						<div id="graph5">
+							<!--  bar  -->
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="agile-last-grids">
+				<div class="col-md-pull-12">
+					<div class="agile-last-grid">
+						<div class="area-grids-heading">
+							<h3>本月饮食记录</h3>
+						</div>
+						<div id="graph8">
+							<!--  bar   -->
+						</div>
+						
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="agile-two-grids">
+				<div class="col-md-6 count">
+						<div class="count-grid">
+							<h2>时间</h2>
+							<ul id="example">
+								<li><span class="hours" id="hours">00</span><p class="hours_text">Hours</p></li>
+								<li class="seperator">:</li>
+								<li><span class="minutes" id="minutes">00</span><p class="minutes_text">Minutes</p></li>
+								<li class="seperator">:</li>
+								<li><span class="seconds" id="seconds">00</span><p class="seconds_text">Seconds</p></li>
+							</ul>
+							<div class="clearfix"> </div>
+							<script>
+								function ShowTime(){
+									var dateTime = new Date();
+									var hour = dateTime.getHours();
+									var minutes = dateTime.getMinutes();
+									var Seconds = dateTime.getSeconds();
+									
+									document.getElementById("hours").textContent = hour;
+									document.getElementById("minutes").textContent = minutes;
+									document.getElementById("seconds").textContent = Seconds;	
+									window.setTimeout('ShowTime()', 1000)
+								}
+								ShowTime();
+							</script>
+						</div>
+				</div>
+				<div class="col-md-6 weather">
+					<div class="weather-right">
+						<div class="weather-heading">
+							<h3>天气报告</h3>
+						</div>
+								<ul>
+									<li>
+										<figure class="icons">
+											<canvas id="partly-cloudy-day" width="60" height="60"></canvas>
+										</figure>
+										<h3>25 °C</h3>
+										<div class="clearfix"></div>
+									</li>
+									<li>
+										<figure class="icons">
+											<canvas id="clear-day" width="40" height="40"></canvas>
+										</figure>
+										<div class="weather-text">
+											<h4>WED</h4>
+											<h5>27 °C</h5>
+										</div>
+										<div class="clearfix"></div>
+									</li>
+									<li>
+										<figure class="icons">
+											<canvas id="snow" width="40" height="40"></canvas>
+										</figure>
+										<div class="weather-text">
+											<h4>THR</h4>
+											<h5>13 °C</h5>
+										</div>
+										<div class="clearfix"></div>
+									</li>
+									<li>
+										<figure class="icons">
+											<canvas id="partly-cloudy-night" width="40" height="40"></canvas>
+										</figure>
+										<div class="weather-text">
+											<h4>FRI</h4>
+											<h5>18 °C</h5>
+										</div>
+										<div class="clearfix"></div>
+									</li>
+									<li>
+										<figure class="icons">
+											<canvas id="cloudy" width="40" height="40"></canvas>
+										</figure>
+										<div class="weather-text">
+											<h4>SAT</h4>
+											<h5>15 °C</h5>
+										</div>
+										<div class="clearfix"></div>
+									</li>
+									<li>
+										<figure class="icons">
+											<canvas id="fog" width="40" height="40"></canvas>
+										</figure>
+										<div class="weather-text">
+											<h4>SUN</h4>
+											<h5>11 °C</h5>
+										</div>
+										<div class="clearfix"></div>
+									</li>
+								</ul>
+								<script>
+									 var icons = new Skycons({"color": "#fcb216"}),
+										  list  = [
+											"partly-cloudy-day"
+										  ],
+										  i;
+
+									  for(i = list.length; i--; )
+										icons.set(list[i], list[i]);
+									  icons.play();
+								</script>
+								<script>
+									 var icons = new Skycons({"color": "#000"}),
+										  list  = [
+											"clear-night","partly-cloudy-night", "cloudy", "clear-day", "sleet", "snow", "wind","fog"
+										  ],
+										  i;
+
+									  for(i = list.length; i--; )
+										icons.set(list[i], list[i]);
+									  icons.play();
+								</script>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!-- footer -->
+		<div class="footer">
+			<p>LovelyCat &copy; 2019.普罗米修斯的火柴</p>
+		</div>
+		<!-- //footer -->
+	<script src="js/bootstrap.js"></script>
+	<script src="js/proton.js"></script>
+	<script src="js/update_data.js"></script>
+	<script src="js/upload.js"></script>
+		<script>
+		$(function () {
+			$('#toggle').click(function () {
+
+					if ($('form#main_form')[0]){
+						close_form();
+					}else{
+						display_form();
+					}
+
+				
+			});	
+		});
+		</script>
+		<p id="hidden"></p>
+</body>
+</html>
